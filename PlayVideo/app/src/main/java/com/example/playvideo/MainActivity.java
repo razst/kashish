@@ -84,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
         String driveApiKey = "AIzaSyBBgrjCtCIfgk9XmhWzgKLo_SQTC8_MNRg";
         String shareURL = "https://drive.google.com/file/d/15jzXnAZDTAqw1z_DoNREXmMhFAgjcV2O/view?usp=sharing";
         String url = "https://www.googleapis.com/drive/v3/files/" + shareURL.substring(32, shareURL.length() - 17) + "?alt=media&key="+driveApiKey;
-        Uri uri = Uri.parse(url);
-        //Uri uri = Uri.parse(shareURL);
-
+        //Uri uri = Uri.parse(url);
+        Uri uri = Uri.parse("https://www.drivehq.com/file/DFPublishFile.aspx/FileID7155480515/Keyovdybccfaog2/WIN_20200515_16_24_36_Pro.mp4");
+                            // https://www.drivehq.com/file/DFPublishFile.aspx/FileID7155513124/Keyu0gbwenen86n/Camera3_18-16-08.mp4
         mVideoView.setVideoURI(uri);
-        //mVideoView.start();
+        mVideoView.start();
 
-
+/*
         // Build a new authorized API client service.
         final NetHttpTransport HTTP_TRANSPORT;
         try {
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
 
     }
