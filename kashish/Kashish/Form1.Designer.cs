@@ -30,13 +30,13 @@
         {
             this.timeTableView = new System.Windows.Forms.DataGridView();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.movieTxb = new System.Windows.Forms.TextBox();
+            this.hourTxb = new System.Windows.Forms.TextBox();
+            this.datePicker = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.okBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.timeTableView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,26 +48,27 @@
             this.timeTableView.Size = new System.Drawing.Size(342, 150);
             this.timeTableView.TabIndex = 0;
             // 
-            // textBox1
+            // movieTxb
             // 
-            this.textBox1.Location = new System.Drawing.Point(503, 45);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 1;
+            this.movieTxb.Location = new System.Drawing.Point(503, 45);
+            this.movieTxb.Name = "movieTxb";
+            this.movieTxb.Size = new System.Drawing.Size(100, 20);
+            this.movieTxb.TabIndex = 1;
             // 
-            // textBox2
+            // hourTxb
             // 
-            this.textBox2.Location = new System.Drawing.Point(503, 132);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 2;
+            this.hourTxb.Location = new System.Drawing.Point(567, 132);
+            this.hourTxb.Name = "hourTxb";
+            this.hourTxb.Size = new System.Drawing.Size(36, 20);
+            this.hourTxb.TabIndex = 2;
+            this.hourTxb.Text = "13:00";
             // 
-            // dateTimePicker1
+            // datePicker
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(403, 88);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 4;
+            this.datePicker.Location = new System.Drawing.Point(403, 88);
+            this.datePicker.Name = "datePicker";
+            this.datePicker.Size = new System.Drawing.Size(200, 20);
+            this.datePicker.TabIndex = 4;
             // 
             // label1
             // 
@@ -77,7 +78,6 @@
             this.label1.Size = new System.Drawing.Size(49, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = ":שם סרט";
-            this.label1.Click += new System.EventHandler(this.ןגיחגע_Click);
             // 
             // label2
             // 
@@ -97,28 +97,28 @@
             this.label3.TabIndex = 7;
             this.label3.Text = ":שעה";
             // 
-            // button1
+            // okBtn
             // 
-            this.button1.Location = new System.Drawing.Point(403, 230);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "אישור";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.okBtn.Location = new System.Drawing.Point(464, 239);
+            this.okBtn.Name = "okBtn";
+            this.okBtn.Size = new System.Drawing.Size(75, 23);
+            this.okBtn.TabIndex = 8;
+            this.okBtn.Text = "אישור";
+            this.okBtn.UseVisualStyleBackColor = true;
+            this.okBtn.Click += new System.EventHandler(this.okBtn_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.okBtn);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.datePicker);
+            this.Controls.Add(this.hourTxb);
+            this.Controls.Add(this.movieTxb);
             this.Controls.Add(this.timeTableView);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -133,13 +133,13 @@
 
         private System.Windows.Forms.DataGridView timeTableView;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox movieTxb;
+        private System.Windows.Forms.TextBox hourTxb;
+        private System.Windows.Forms.DateTimePicker datePicker;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button okBtn;
     }
 }
 

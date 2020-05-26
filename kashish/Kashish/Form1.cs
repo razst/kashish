@@ -18,23 +18,9 @@ namespace Kashish
             InitializeComponent();
         }
         private DataTable timeTable = new DataTable();
-        private async void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            /*
-            linkInfo t = new linkInfo();
-            t.URL = "git.com";
-            t.desc = "best ever";
 
-            var unspecified = DateTime.Now;
-            var specified = DateTime.SpecifyKind(unspecified, DateTimeKind.Utc);
-
-            t.startTime = specified;
-
-            DocumentReference docRef = Program.db.Collection("timetable").Document();
-
-
-            await docRef.SetAsync(t);
-            */
 
 
 
@@ -44,6 +30,11 @@ namespace Kashish
 
             timeTableView.DataSource = timeTable;
 
+            showLast();
+        }
+        private async void showLast()
+        {
+            timeTable.Rows.Clear();
             Query capitalQuery = Program.db.Collection("timetable").Limit(100);
             QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
             foreach (DocumentSnapshot documentSnapshot in capitalQuerySnapshot.Documents)
@@ -56,14 +47,27 @@ namespace Kashish
             timeTableView.AutoResizeColumns();
         }
 
-        private void ןגיחגע_Click(object sender, EventArgs e)
+        private async void okBtn_Click(object sender, EventArgs e)
         {
+            //Console.WriteLine(datePicker.Value.ToString().Substring(0,11)+hourTxb.Text);
 
-        }
+            
+            linkInfo t = new linkInfo();
+            t.URL = movieTxb.Text+".com";
+            t.desc = movieTxb.Text;
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+            var unspecified = DateTime.Parse(datePicker.Value.ToString().Substring(0, 11) + hourTxb.Text);
+            var specified = DateTime.SpecifyKind(unspecified, DateTimeKind.Utc);
 
+            t.startTime = specified;
+
+
+            DocumentReference docRef = Program.db.Collection("timetable").Document();
+
+
+            await docRef.SetAsync(t);
+
+            showLast();
         }
     }
 }
