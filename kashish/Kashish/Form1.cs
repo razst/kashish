@@ -27,6 +27,7 @@ namespace Kashish
             timeTable.Columns.Add("שם סרט", typeof(string));
             timeTable.Columns.Add("תאריך", typeof(string));
             timeTable.Columns.Add("שעה", typeof(string));
+            timeTable.Columns.Add("ID", typeof(string));
 
             timeTableView.DataSource = timeTable;
 
@@ -41,7 +42,7 @@ namespace Kashish
             {
                 linkInfo temp = documentSnapshot.ConvertTo<linkInfo>();
 
-                timeTable.Rows.Add(temp.desc, temp.startTime.ToString("dd/MM/yyyy"), temp.startTime.ToString("HH:mm"));
+                timeTable.Rows.Add(temp.name, temp.startTime.ToString("dd/MM/yyyy"), temp.startTime.ToString("HH:mm"), temp.DocID);
                 //Console.WriteLine("{0} , {1} , {2}",temp.URL,temp.desc,temp.startTime);
             }
             timeTableView.AutoResizeColumns();
@@ -53,8 +54,9 @@ namespace Kashish
 
             
             linkInfo t = new linkInfo();
-            t.URL = movieTxb.Text+".com";
-            t.desc = movieTxb.Text;
+            t.URL = UrlTxb.Text;
+            t.name = movieTxb.Text;
+            t.desk = DeskTxb.Text;
 
             var unspecified = DateTime.Parse(datePicker.Value.ToString().Substring(0, 11) + hourTxb.Text);
             var specified = DateTime.SpecifyKind(unspecified, DateTimeKind.Utc);
@@ -64,10 +66,21 @@ namespace Kashish
 
             DocumentReference docRef = Program.db.Collection("timetable").Document();
 
-
             await docRef.SetAsync(t);
 
             showLast();
+        }
+
+        private void timeTableView_DoubleClick(object sender, EventArgs e)
+        {
+            if (timeTableView.SelectedRows.Count > 0)
+            {
+                Form2 f = new Form2();
+
+                f.ShowData(timeTableView.Rows[timeTableView.SelectedRows[0].Index].Cells[3].Value.ToString());
+                f.ShowDialog();
+            }
+
         }
     }
 }

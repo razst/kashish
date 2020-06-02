@@ -10,14 +10,21 @@ namespace Kashish
     [FirestoreData]
     internal class linkInfo
     {
-        [FirestoreProperty]
 
-        public string URL { get; set; }
+        [FirestoreDocumentId]
+        public string DocID { get; set; }
+
         [FirestoreProperty]
-        public string desc { get; set; }
+        public string URL { get; set; }
+
+        [FirestoreProperty]
+        public string name { get; set; }
 
         [FirestoreProperty]
         public DateTime startTime { get; set; }
+
+        [FirestoreProperty]
+        public string desk { get; set;  }
 
     }
 }
