@@ -35,7 +35,7 @@ import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 public class MainActivity extends AppCompatActivity {
 
     final String TAG = "fire store data";
-    final int LATE_TIME = 900;//time in second that the kashish can late and the video play any way
+    final int LATE_TIME = 900;//time in second that the kashish can late and the video play any ways
     final String NOT_FOUND = "not Found";
     private String myUrl = NOT_FOUND;
     @Override
