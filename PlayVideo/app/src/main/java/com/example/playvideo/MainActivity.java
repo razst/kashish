@@ -5,9 +5,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.browse.MediaBrowser;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v4.media.MediaBrowserCompat;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Window;
 import android.widget.VideoView;
 
@@ -22,12 +28,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.time.Instant;
 
+import static android.media.session.MediaSession.FLAG_HANDLES_MEDIA_BUTTONS;
 import static android.view.View.SYSTEM_UI_FLAG_FULLSCREEN;
 import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 
@@ -44,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getSupportActionBar().hide(); //hide the title bar
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
 
         Log.d(TAG,  "1" );
         getUrl(db);
@@ -83,13 +88,9 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean videoNow(Timestamp time) {
         Timestamp now = Timestamp.now();
-        if(now.getSeconds() - time.getSeconds() < LATE_TIME && now.getSeconds() - time.getSeconds() > 0){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return now.getSeconds() - time.getSeconds() < LATE_TIME && now.getSeconds() - time.getSeconds() > 0;
     }
+
     public void playVideo(){
         if(!myUrl.equals(NOT_FOUND)) {
             setContentView(R.layout.activity_main);
