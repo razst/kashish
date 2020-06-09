@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.time.Instant;
+import java.util.Objects;
 
 import static android.media.session.MediaSession.FLAG_HANDLES_MEDIA_BUTTONS;
 import static android.view.View.SYSTEM_UI_FLAG_FULLSCREEN;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
-        getSupportActionBar().hide(); //hide the title bar
+        Objects.requireNonNull(getSupportActionBar()).hide(); //hide the title bar
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Log.d(TAG,  "1" );
@@ -63,26 +64,24 @@ public class MainActivity extends AppCompatActivity {
         myUrl = NOT_FOUND;
         db.collection("timetable")
                 .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                if(videoNow((Timestamp) document.getData().get("startTime"))){
-                                    myUrl = (String) document.getData().get("URL");
-                                    Log.d(TAG, myUrl);
-                                    break;
-                                }
-                                else {
-                                    Log.d(TAG, videoNow((Timestamp) document.getData().get("startTime"))+"");
-                                }
-                                Log.d(TAG, document.getId() + " => " + document.getData());
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                            if(videoNow((Timestamp) Objects.requireNonNull(document.getData().get("startTime")))){
+                                myUrl = (String) document.getData().get("URL");
+                                assert myUrl != null;
+                                Log.d(TAG, myUrl);
+                                break;
                             }
-                        } else {
-                            Log.w(TAG, "Error getting documents.", task.getException());
+                            else {
+                                Log.d(TAG, videoNow((Timestamp) Objects.requireNonNull(document.getData().get("startTime")))+"");
+                            }
+                            Log.d(TAG, document.getId() + " => " + document.getData());
                         }
-                        playVideo();
+                    } else {
+                        Log.w(TAG, "Error getting documents.", task.getException());
                     }
+                    playVideo();
                 });
     }
 
