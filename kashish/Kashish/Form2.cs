@@ -33,24 +33,29 @@ namespace Kashish
             InitializeComponent();
         }
 
-        private void Form2_Load(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
+            //Console.WriteLine(datePicker.Value.ToString().Substring(0,11)+hourTxb.Text);
 
-        }
 
-        private void UrlTxb_TextChanged(object sender, EventArgs e)
-        {
+            linkInfo t = new linkInfo();
+            t.URL = UrlTxb.Text;
+            t.name = movieTxb.Text;
+            t.desk = DeskTxb.Text;
 
-        }
+            var unspecified = DateTime.Parse(datePicker.Value.ToString().Substring(0, 11) + hourTxb.Text);
+            var specified = DateTime.SpecifyKind(unspecified, DateTimeKind.Utc);
 
-        private async void movieTxb_TextChanged(object sender, EventArgs e)
-        {
-            
+            t.startTime = specified;
+
+
             DocumentReference docRef = Program.db.Collection("timetable").Document();
-            DocumentSnapshot docSnep = await docRef.GetSnapshotAsync();
 
-            linkInfo li = docSnep.ConvertTo<linkInfo>();
+            await docRef.SetAsync(t);
 
+           Form1.frm1.showLast();
+
+            this.Close();
         }
     }
 }

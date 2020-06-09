@@ -38,6 +38,7 @@
             this.hourTxb = new System.Windows.Forms.TextBox();
             this.datePicker = new System.Windows.Forms.DateTimePicker();
             this.movieTxb = new System.Windows.Forms.TextBox();
+            this.okBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // DeskT
@@ -62,7 +63,6 @@
             this.UrlTxb.Name = "UrlTxb";
             this.UrlTxb.Size = new System.Drawing.Size(100, 20);
             this.UrlTxb.TabIndex = 20;
-            this.UrlTxb.TextChanged += new System.EventHandler(this.UrlTxb_TextChanged);
             // 
             // label3
             // 
@@ -121,13 +121,23 @@
             this.movieTxb.Name = "movieTxb";
             this.movieTxb.Size = new System.Drawing.Size(100, 20);
             this.movieTxb.TabIndex = 13;
-            this.movieTxb.TextChanged += new System.EventHandler(this.movieTxb_TextChanged);
+            // 
+            // okBtn
+            // 
+            this.okBtn.Location = new System.Drawing.Point(35, 255);
+            this.okBtn.Name = "okBtn";
+            this.okBtn.Size = new System.Drawing.Size(75, 23);
+            this.okBtn.TabIndex = 23;
+            this.okBtn.Text = "אישור";
+            this.okBtn.UseVisualStyleBackColor = true;
+            this.okBtn.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(349, 290);
+            this.Controls.Add(this.okBtn);
             this.Controls.Add(this.DeskT);
             this.Controls.Add(this.DeskTxb);
             this.Controls.Add(this.UrlTxb);
@@ -140,7 +150,6 @@
             this.Controls.Add(this.movieTxb);
             this.Name = "Form2";
             this.Text = "Form2";
-            this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,5 +167,6 @@
         private System.Windows.Forms.TextBox hourTxb;
         private System.Windows.Forms.DateTimePicker datePicker;
         private System.Windows.Forms.TextBox movieTxb;
+        private System.Windows.Forms.Button okBtn;
     }
 }
