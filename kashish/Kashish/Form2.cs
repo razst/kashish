@@ -13,9 +13,19 @@ namespace Kashish
 {
     public partial class Form2 : Form
     {
-        public void ShowData(String docID)
+        public async void ShowData(String docID)
         {
 
+            DocumentReference docRef = Program.db.Collection("timetable").Document(docID);
+            DocumentSnapshot docSnep = await docRef.GetSnapshotAsync();
+
+            linkInfo li = docSnep.ConvertTo<linkInfo>();
+
+            UrlTxb.Text = li.URL;
+            movieTxb.Text = li.name;
+            DeskTxb.Text = li.desk;
+            hourTxb.Text = li.startTime.ToString("HH:mm");
+            datePicker.Value = li.startTime;
         }
 
         public Form2()

@@ -29,7 +29,12 @@ namespace Kashish
             timeTable.Columns.Add("שעה", typeof(string));
             timeTable.Columns.Add("ID", typeof(string));
 
+            
+
             timeTableView.DataSource = timeTable;
+            timeTableView.Columns[3].Visible = false;
+
+            timeTableView.Sort(timeTableView.Columns["תאריך"], ListSortDirection.Descending);
 
             showLast();
         }
