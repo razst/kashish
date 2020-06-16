@@ -195,3 +195,4 @@ C:\ISIS\workspace_ycube\kashish\kashish\Kashish\obj\Debug\Kashish.csproj.CopyCom
 C:\ISIS\workspace_ycube\kashish\kashish\Kashish\obj\Debug\Kashish.exe
 C:\ISIS\workspace_ycube\kashish\kashish\Kashish\obj\Debug\Kashish.pdb
 C:\ISIS\workspace_ycube\kashish\kashish\Kashish\obj\Debug\Kashish.Form2.resources
+C:\Users\pc\Documents\GitHub\kashish\kashish\Kashish\obj\Debug\Kashish.Form2.resources
