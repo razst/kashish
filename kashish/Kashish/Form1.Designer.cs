@@ -36,16 +36,21 @@
             // 
             // timeTableView
             // 
+            this.timeTableView.AllowUserToAddRows = false;
+            this.timeTableView.AllowUserToDeleteRows = false;
+            this.timeTableView.AllowUserToOrderColumns = true;
+            this.timeTableView.AllowUserToResizeColumns = false;
+            this.timeTableView.AllowUserToResizeRows = false;
             this.timeTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.timeTableView.Location = new System.Drawing.Point(12, 26);
             this.timeTableView.Name = "timeTableView";
-            this.timeTableView.Size = new System.Drawing.Size(342, 150);
+            this.timeTableView.Size = new System.Drawing.Size(238, 373);
             this.timeTableView.TabIndex = 0;
             this.timeTableView.DoubleClick += new System.EventHandler(this.timeTableView_DoubleClick);
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(218, 329);
+            this.openBtn.Location = new System.Drawing.Point(27, 415);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(75, 23);
             this.openBtn.TabIndex = 13;
@@ -57,7 +62,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(394, 450);
             this.Controls.Add(this.openBtn);
             this.Controls.Add(this.timeTableView);
             this.Name = "Form1";

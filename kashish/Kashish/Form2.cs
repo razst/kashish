@@ -13,6 +13,7 @@ namespace Kashish
 {
     public partial class Form2 : Form
     {
+        private string givenId = "";
         public async void ShowData(String docID)
         {
 
@@ -26,6 +27,8 @@ namespace Kashish
             DeskTxb.Text = li.desk;
             hourTxb.Text = li.startTime.ToString("HH:mm");
             datePicker.Value = li.startTime;
+
+            givenId = docID;
         }
 
         public Form2()
@@ -36,7 +39,11 @@ namespace Kashish
         private async void button1_Click(object sender, EventArgs e)
         {
             //Console.WriteLine(datePicker.Value.ToString().Substring(0,11)+hourTxb.Text);
-
+            if (UrlTxb.Text == "" || movieTxb.Text == "" || DeskTxb.Text == "" || hourTxb.Text == "")
+            {
+                MessageBox.Show("נא למלא את כל השדות");
+                return;
+            }
 
             linkInfo t = new linkInfo();
             t.URL = UrlTxb.Text;
@@ -48,14 +55,36 @@ namespace Kashish
 
             t.startTime = specified;
 
+            DocumentReference docRef = null;
 
-            DocumentReference docRef = Program.db.Collection("timetable").Document();
+            if (givenId == "")
+            {
+                docRef = Program.db.Collection("timetable").Document();
+            }
+            else
+            {
+                docRef = Program.db.Collection("timetable").Document(givenId);
+            }
+
 
             await docRef.SetAsync(t);
 
-           Form1.frm1.showLast();
+            Form1.frm1.showLast();
 
             this.Close();
+        }
+
+        private async void urlBtn_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() => {
+                try
+                {
+                    System.Diagnostics.Process.Start(UrlTxb.Text);
+                }
+                catch
+                {
+                }
+            });  
         }
     }
 }

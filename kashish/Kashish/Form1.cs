@@ -30,7 +30,7 @@ namespace Kashish
             timeTable.Columns.Add("שעה", typeof(string));
             timeTable.Columns.Add("ID", typeof(string));
 
-            
+
 
             timeTableView.DataSource = timeTable;
             timeTableView.Columns[3].Visible = false;
@@ -41,7 +41,7 @@ namespace Kashish
         public async void showLast()
         {
             timeTable.Rows.Clear();
-            Query capitalQuery = Program.db.Collection("timetable").Limit(100).WhereGreaterThanOrEqualTo("startTime",DateTime.Today.ToUniversalTime());
+            Query capitalQuery = Program.db.Collection("timetable").Limit(100).WhereGreaterThanOrEqualTo("startTime", DateTime.Today.ToUniversalTime());
             QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
             foreach (DocumentSnapshot documentSnapshot in capitalQuerySnapshot.Documents)
             {
@@ -62,8 +62,9 @@ namespace Kashish
             if (timeTableView.SelectedRows.Count > 0)
             {
                 f = new Form2();
+                if (timeTableView.Rows[timeTableView.SelectedRows[0].Index].Cells[3].Value.ToString() != "")
+                    f.ShowData(timeTableView.Rows[timeTableView.SelectedRows[0].Index].Cells[3].Value.ToString());
 
-                f.ShowData(timeTableView.Rows[timeTableView.SelectedRows[0].Index].Cells[3].Value.ToString());
                 f.ShowDialog();
             }
 

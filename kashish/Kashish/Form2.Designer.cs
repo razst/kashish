@@ -39,6 +39,7 @@
             this.datePicker = new System.Windows.Forms.DateTimePicker();
             this.movieTxb = new System.Windows.Forms.TextBox();
             this.okBtn = new System.Windows.Forms.Button();
+            this.urlBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // DeskT
@@ -132,11 +133,22 @@
             this.okBtn.UseVisualStyleBackColor = true;
             this.okBtn.Click += new System.EventHandler(this.button1_Click);
             // 
+            // urlBtn
+            // 
+            this.urlBtn.Location = new System.Drawing.Point(68, 45);
+            this.urlBtn.Name = "urlBtn";
+            this.urlBtn.Size = new System.Drawing.Size(42, 23);
+            this.urlBtn.TabIndex = 24;
+            this.urlBtn.Text = "פתח";
+            this.urlBtn.UseVisualStyleBackColor = true;
+            this.urlBtn.Click += new System.EventHandler(this.urlBtn_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(349, 290);
+            this.Controls.Add(this.urlBtn);
             this.Controls.Add(this.okBtn);
             this.Controls.Add(this.DeskT);
             this.Controls.Add(this.DeskTxb);
@@ -168,5 +180,6 @@
         private System.Windows.Forms.DateTimePicker datePicker;
         private System.Windows.Forms.TextBox movieTxb;
         private System.Windows.Forms.Button okBtn;
+        private System.Windows.Forms.Button urlBtn;
     }
 }
