@@ -11,7 +11,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.media.MediaBrowserCompat;
+import android.support.v4.media.session.MediaControllerCompat;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.support.v4.media.session.PlaybackStateCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
@@ -41,10 +43,14 @@ import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 
 public class MainActivity extends AppCompatActivity {
 
+    static VideoView mVideoView = null;
     final String TAG = "fire store data";
     final int LATE_TIME = 900;//time in second that the kashish can late and the video play any ways
     final String NOT_FOUND = "not Found";
     private String myUrl = NOT_FOUND;
+    MediaSessionCompat mediaSession;
+    PlaybackStateCompat.Builder stateBuilder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +61,36 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG,  "1" );
         getUrl(db);
         Log.d(TAG,  "2" );
+
+        mediaSession = new MediaSessionCompat(this, TAG);
+
+        /* Enable callbacks from MediaButtons and TransportControls
+        mediaSession.setFlags(
+                MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS |
+                        MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
+*/
+        // Do not let MediaButtons restart the player when the app is not visible
+//        mediaSession.setMediaButtonReceiver(null);
+        // Set an initial PlaybackState with ACTION_PLAY, so media buttons can start the player
+        stateBuilder = new PlaybackStateCompat.Builder()
+                .setActions(
+                        PlaybackStateCompat.ACTION_PLAY |
+                                PlaybackStateCompat.ACTION_PLAY_PAUSE);
+        mediaSession.setPlaybackState(stateBuilder.build());
+
+        //mediaSession.setState(stateBuilder.build());
+
+
+        // MySessionCallback has methods that handle callbacks from a media controller
+        mediaSession.setCallback(mMediaSessionCallback);
+
+         //Create a MediaControllerCompat
+        MediaControllerCompat mediaController =
+                new MediaControllerCompat(this, mediaSession);
+
+        MediaControllerCompat.setMediaController(this, mediaController);
+
+        mediaSession.setActive(true);
 
 
 
@@ -85,6 +121,28 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    private MediaSessionCompat.Callback mMediaSessionCallback = new MediaSessionCompat.Callback() {
+
+        @Override
+        public void onPlay() {
+            super.onPlay();
+            if (mVideoView != null) {
+                setContentView(R.layout.activity_main);
+                mVideoView = findViewById(R.id.videoview);
+                mVideoView.setSystemUiVisibility(SYSTEM_UI_FLAG_FULLSCREEN | SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+                String driveApiKey = "AIzaSyDJe_6Ak2OXjN1-pBv9hJYOIU2CyktyKUQ";
+                String urls = "https://drive.google.com/file/d/10XYk_iKpdlm1w78GHjDT8lAIhulH_U0G/view?usp=sharing";
+                String url = "https://www.googleapis.com/drive/v3/files/" + urls.substring(32, urls.length() - 17) + "?alt=media&key=" + driveApiKey;
+                Uri uri = Uri.parse(url);
+
+                mVideoView.setVideoURI(uri);
+                mVideoView.start();
+            }
+
+        }
+    };
+
+
     public boolean videoNow(Timestamp time) {
         Timestamp now = Timestamp.now();
         return now.getSeconds() - time.getSeconds() < LATE_TIME && now.getSeconds() - time.getSeconds() > 0;
@@ -112,4 +170,6 @@ public class MainActivity extends AppCompatActivity {
         //TODO this function
     }
 }
+
+
 

@@ -18,30 +18,30 @@ namespace Kashish
             InitializeComponent();
         }
         private DataTable timeTable = new DataTable();
+        static public Form1 frm1 = null;
         private void Form1_Load(object sender, EventArgs e)
         {
 
 
-
+            frm1 = this;
 
             timeTable.Columns.Add("שם סרט", typeof(string));
             timeTable.Columns.Add("תאריך", typeof(string));
             timeTable.Columns.Add("שעה", typeof(string));
             timeTable.Columns.Add("ID", typeof(string));
 
-            
+
 
             timeTableView.DataSource = timeTable;
             timeTableView.Columns[3].Visible = false;
 
-            timeTableView.Sort(timeTableView.Columns["תאריך"], ListSortDirection.Descending);
 
             showLast();
         }
-        private async void showLast()
+        public async void showLast()
         {
             timeTable.Rows.Clear();
-            Query capitalQuery = Program.db.Collection("timetable").Limit(100);
+            Query capitalQuery = Program.db.Collection("timetable").Limit(100).WhereGreaterThanOrEqualTo("startTime", DateTime.Today.ToUniversalTime());
             QuerySnapshot capitalQuerySnapshot = await capitalQuery.GetSnapshotAsync();
             foreach (DocumentSnapshot documentSnapshot in capitalQuerySnapshot.Documents)
             {
@@ -51,41 +51,30 @@ namespace Kashish
                 //Console.WriteLine("{0} , {1} , {2}",temp.URL,temp.desc,temp.startTime);
             }
             timeTableView.AutoResizeColumns();
+            timeTableView.Sort(timeTableView.Columns["תאריך"], ListSortDirection.Ascending);
         }
 
-        private async void okBtn_Click(object sender, EventArgs e)
-        {
-            //Console.WriteLine(datePicker.Value.ToString().Substring(0,11)+hourTxb.Text);
-
-            
-            linkInfo t = new linkInfo();
-            t.URL = UrlTxb.Text;
-            t.name = movieTxb.Text;
-            t.desk = DeskTxb.Text;
-
-            var unspecified = DateTime.Parse(datePicker.Value.ToString().Substring(0, 11) + hourTxb.Text);
-            var specified = DateTime.SpecifyKind(unspecified, DateTimeKind.Utc);
-
-            t.startTime = specified;
 
 
-            DocumentReference docRef = Program.db.Collection("timetable").Document();
-
-            await docRef.SetAsync(t);
-
-            showLast();
-        }
-
+        private Form2 f;
         private void timeTableView_DoubleClick(object sender, EventArgs e)
         {
             if (timeTableView.SelectedRows.Count > 0)
             {
-                Form2 f = new Form2();
+                f = new Form2();
+                if (timeTableView.Rows[timeTableView.SelectedRows[0].Index].Cells[3].Value.ToString() != "")
+                    f.ShowData(timeTableView.Rows[timeTableView.SelectedRows[0].Index].Cells[3].Value.ToString());
 
-                f.ShowData(timeTableView.Rows[timeTableView.SelectedRows[0].Index].Cells[3].Value.ToString());
                 f.ShowDialog();
             }
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            f = new Form2();
+
+            f.ShowDialog();
         }
     }
 }
