@@ -17,7 +17,7 @@ namespace Kashish
         [STAThread]
         static void Main()
         {
-            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\key\kashish-5f84f89b13cc.json");
+            System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @"C:\key\kashish-6fbdb9687f16.json");
             db = FirestoreDb.Create("kashish-d09e4");
 
 

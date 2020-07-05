@@ -44,13 +44,13 @@
             this.timeTableView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.timeTableView.Location = new System.Drawing.Point(12, 26);
             this.timeTableView.Name = "timeTableView";
-            this.timeTableView.Size = new System.Drawing.Size(238, 373);
+            this.timeTableView.Size = new System.Drawing.Size(370, 373);
             this.timeTableView.TabIndex = 0;
             this.timeTableView.DoubleClick += new System.EventHandler(this.timeTableView_DoubleClick);
             // 
             // openBtn
             // 
-            this.openBtn.Location = new System.Drawing.Point(27, 415);
+            this.openBtn.Location = new System.Drawing.Point(161, 405);
             this.openBtn.Name = "openBtn";
             this.openBtn.Size = new System.Drawing.Size(75, 23);
             this.openBtn.TabIndex = 13;
@@ -62,11 +62,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(394, 450);
+            this.ClientSize = new System.Drawing.Size(394, 433);
             this.Controls.Add(this.openBtn);
             this.Controls.Add(this.timeTableView);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "מסך ראשי";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.timeTableView)).EndInit();
             this.ResumeLayout(false);

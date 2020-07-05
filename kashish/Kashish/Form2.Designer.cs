@@ -139,7 +139,7 @@
             this.urlBtn.Name = "urlBtn";
             this.urlBtn.Size = new System.Drawing.Size(42, 23);
             this.urlBtn.TabIndex = 24;
-            this.urlBtn.Text = "פתח";
+            this.urlBtn.Text = "הצג";
             this.urlBtn.UseVisualStyleBackColor = true;
             this.urlBtn.Click += new System.EventHandler(this.urlBtn_Click);
             // 
@@ -161,7 +161,7 @@
             this.Controls.Add(this.datePicker);
             this.Controls.Add(this.movieTxb);
             this.Name = "Form2";
-            this.Text = "Form2";
+            this.Text = "עריכת סרט";
             this.ResumeLayout(false);
             this.PerformLayout();
 
